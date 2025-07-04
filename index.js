@@ -18,7 +18,9 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'http://127.0.0.1:5500' 
+    'http://127.0.0.1:5500',
+    'https://gabrielricardoimoveis-dashboard.vercel.app',
+    'https://gabrielricardoimoveis.vercel.app',
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
