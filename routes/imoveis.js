@@ -12,7 +12,7 @@ function formatarImovel(imovel) {
   return { id: _id.toString(), ...resto };
 }
 
-// Schema para CRIAÇÃO de imóvel (campo 'condominio' removido)
+// Schema para CRIAÇÃO de imóvel com campos opcionais
 const createSchemaImovel = Joi.object({
   titulo: Joi.string().min(3).max(100).required(),
   descricao: Joi.string().min(10).max(1000).required(),
@@ -20,9 +20,9 @@ const createSchemaImovel = Joi.object({
   cidade: Joi.string().min(2).max(50).required(),
   bairro: Joi.string().min(2).max(50).required(),
   tipo: Joi.string().valid('casa', 'apartamento', 'terreno', 'comercial').required(),
-  valorCondominio: Joi.number().min(0).optional().allow(null), // Permite null ou número
-  dormitorios: Joi.number().integer().min(0).required(),
-  banheiros: Joi.number().integer().min(0).required(),
+  valorCondominio: Joi.number().min(0).optional().allow(null),
+  dormitorios: Joi.number().integer().min(0).optional(),
+  banheiros: Joi.number().integer().min(0).optional(),
   piscina: Joi.boolean().optional(),
   garagem: Joi.boolean().optional(),
   area: Joi.number().min(0).required(),
@@ -31,7 +31,7 @@ const createSchemaImovel = Joi.object({
   finalidade: Joi.string().valid('venda', 'locacao').required()
 });
 
-// Schema para ATUALIZAÇÃO de imóvel (campo 'condominio' removido)
+// Schema para ATUALIZAÇÃO de imóvel (campos já eram opcionais, mas adicionado .optional() para clareza)
 const updateSchemaImovel = Joi.object({
   titulo: Joi.string().min(3).max(100),
   descricao: Joi.string().min(10).max(1000),
@@ -40,8 +40,8 @@ const updateSchemaImovel = Joi.object({
   bairro: Joi.string().min(2).max(50),
   tipo: Joi.string().valid('casa', 'apartamento', 'terreno', 'comercial'),
   valorCondominio: Joi.number().min(0).optional().allow(null),
-  dormitorios: Joi.number().integer().min(0),
-  banheiros: Joi.number().integer().min(0),
+  dormitorios: Joi.number().integer().min(0).optional(),
+  banheiros: Joi.number().integer().min(0).optional(),
   piscina: Joi.boolean(),
   garagem: Joi.boolean(),
   area: Joi.number().min(0),
